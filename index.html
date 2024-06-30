@@ -46,11 +46,12 @@
             color: white;
             background-color: #007BFF;
             border: none;
+margin-left: 10px;
         }
         input {
             padding: 8px;
             font-size: 14px;
-		margin-left: -40px;
+		margin-left: 10px;
         }
     </style>
 </head>
@@ -89,6 +90,8 @@
 
 <input type="text" id="searchBox" placeholder="Game Name...">
     <button onclick="searchText()">Search</button>
+<strong><a>‎‎‎‎ㅤㅤ</a></strong></h5>
+
 				
 				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary-outline display-4" href="https://discord.gg/eZuMSR2p47">Discord</a></div>
 			</div>
@@ -669,7 +672,10 @@
             const searchTextValue = searchBox.value.trim();
             if (searchTextValue === '') return;
 
-            highlightText(document.body, searchTextValue);
+            // Sanitize search input
+            const sanitizedSearchText = searchTextValue.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+            highlightText(document.body, sanitizedSearchText);
 
             // Scroll to the first highlighted occurrence
             const firstHighlight = document.querySelector('.highlight');

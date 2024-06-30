@@ -38,6 +38,8 @@
 </head>
 <body>
 
+	
+
   <section data-bs-version="5.1" class="menu menu1 cid-ugxusOgZSG" once="menu" id="menu01-5">
 	
 
@@ -83,6 +85,66 @@
     <div class="row">
       <div class="content-wrap col-12 col-md-12">
         <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1">
+
+		
+
+		<label>Find Text</label>
+<input id="userFindInputText" type="text" value=""/>
+<button id="userFindInputButton" type="button">Find</button>
+
+<script type="text/javascript">        
+
+    (function($){
+
+        $(function(){
+
+            // REMOVE THIS LINE once its working
+            if (!$.fn.highlight) { alert("Hightlight Plugin NOT LOADED!"); }
+
+
+            var classNames      = "ms-status-yellow s4-status-s3 highlight",
+                currentKeyword  = '',
+                $container      = $("#s4-workspace"), // This selector assumes SP2010/2013. Use "body" if on SP2007
+                highlight       = function(){
+
+                    var findText = $("#userFindInputText").val();
+
+                    if (!findText) {
+
+                        alert("Enter a search value");
+                        return this;
+
+                    }
+
+                    // Unhighlight any previous keywords
+                    if (currentKeyword) {
+
+                        $container.unhighlight({className: "highlight"});                            
+                    }
+
+                    currentKeyword = findText;
+                    $container.highlight(findText, {className: classNames});                        
+                    return this;
+                };
+
+            $("#userFindInputText").on("keyup", function(ev){
+                if (ev.which === 13) {
+
+                    highlight.apply(this, arguments);
+
+                }
+            });
+
+            $("#userFindInputButton").on("click", highlight)
+
+        });
+
+    })(jQuery);
+
+</script>
+
+		
+		
           <strong><br>NSFW</strong><br><strong>itsaleak</strong></h1>
         <h2 class="mbr-section-subtitle mbr-fonts-style mbr-white mb-4 display-2">Download PAID NSFW Itch games for absolutely free!</h2>
         <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">The images redirect you to their itch.io page for info, and if you want to support the developers, while the name beneath shows what device you will download it on.</p>

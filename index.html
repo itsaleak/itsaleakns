@@ -621,7 +621,7 @@
 </div>  
   
 </p>
-<script>
+ <script>
         function searchText() {
             // Function to remove all previous highlights
             function removeHighlights(element) {
@@ -655,6 +655,12 @@
             if (searchTextValue === '') return;
 
             highlightText(document.body, searchTextValue);
+
+            // Scroll to the first highlighted occurrence
+            const firstHighlight = document.querySelector('.highlight');
+            if (firstHighlight) {
+                firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
     </script>
 

@@ -30,6 +30,16 @@
 (function(){var n=window,g="eadd9528ea93be1eaf0de854ac6adc87",r=[["siteId",841+58+206*260+83+5056416],["minBid",0.001],["popundersPerIP","60:1,60:1"],["delayBetween",1],["default",false],["defaultPerDay",20],["topmostLayer","auto"]],y=["d3d3LmludGVsbGlnZW5jZWFkeC5jb20vei9kanF1ZXJ5LmZsdWlkYm94Lm1pbi5qcw==","ZDJrbHg4N2Jnem5nY2UuY2xvdWRmcm9udC5uZXQvQkpjcUhNL1BPcC91ZXhjZWxqcy5taW4uY3Nz"],s=-1,z,p,m=function(){clearTimeout(p);s++;if(y[s]&&!(1745513928000<(new Date).getTime()&&1<s)){z=n.document.createElement("script");z.type="text/javascript";z.async=!0;var o=n.document.getElementsByTagName("script")[0];z.src="https://"+atob(y[s]);z.crossOrigin="anonymous";z.onerror=m;z.onload=function(){clearTimeout(p);n[g.slice(0,16)+g.slice(0,16)]||m()};p=setTimeout(m,5E3);o.parentNode.insertBefore(z,o)}};if(!n[g]){try{Object.freeze(n[g]=r)}catch(e){}m()}})();
 /*]]>/* */
 </script>
+
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Search</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+
 </head>
 <body>
 	
@@ -77,6 +87,11 @@
       <div class="content-wrap col-12 col-md-12">
         <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1">
 
+
+		<input type="text" id="searchBox" placeholder="Search text...">
+    <button onclick="searchText()">Search</button>
+
+		
           <strong><br>NSFW</strong><br><strong>itsaleak</strong></h1>
         <h2 class="mbr-section-subtitle mbr-fonts-style mbr-white mb-4 display-2">Download PAID NSFW Itch games for absolutely free!</h2>
         <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">The images redirect you to their itch.io page for info, and if you want to support the developers, while the name beneath shows what device you will download it on.</p>
@@ -87,6 +102,8 @@
 </section>
 <section data-bs-version="5.1" class="features03 cid-ugxw2vXECT" id="features03-6">
 	
+
+<p id="content">
 	
 	<div class="container">
 		<div class="row justify-content-center mb-5">
@@ -603,5 +620,27 @@
   </div>
 </div>  
   
+</p>
+<script>
+        function searchText() {
+            // Remove previous highlights
+            let highlighted = document.querySelectorAll('.highlight');
+            highlighted.forEach((item) => {
+                let text = item.textContent;
+                item.outerHTML = text;
+            });
+
+            let searchBox = document.getElementById('searchBox');
+            let searchText = searchBox.value;
+            if (!searchText) return;
+
+            let content = document.getElementById('content');
+            let innerHTML = content.innerHTML;
+            let regex = new RegExp(searchText, 'gi');
+            let newHTML = innerHTML.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+            content.innerHTML = newHTML;
+        }
+    </script>
+
 </body>
 </html>

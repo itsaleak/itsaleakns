@@ -623,22 +623,38 @@
 </p>
 <script>
         function searchText() {
+            // Function to remove all previous highlights
+            function removeHighlights(element) {
+                const highlights = element.querySelectorAll('.highlight');
+                highlights.forEach((item) => {
+                    const textNode = document.createTextNode(item.textContent);
+                    item.parentNode.replaceChild(textNode, item);
+                });
+            }
+
+            // Function to highlight text
+            function highlightText(node, searchText) {
+                if (node.nodeType === 3) { // Text node
+                    const nodeText = node.textContent;
+                    const regex = new RegExp(searchText, 'gi');
+                    if (regex.test(nodeText)) {
+                        const span = document.createElement('span');
+                        span.innerHTML = nodeText.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+                        node.parentNode.replaceChild(span, node);
+                    }
+                } else if (node.nodeType === 1 && node.childNodes && !/^(script|style)$/i.test(node.tagName)) { // Element node
+                    node.childNodes.forEach(child => highlightText(child, searchText));
+                }
+            }
+
             // Remove previous highlights
-            let highlighted = document.querySelectorAll('.highlight');
-            highlighted.forEach((item) => {
-                let text = item.textContent;
-                item.outerHTML = text;
-            });
+            removeHighlights(document.body);
 
-            let searchBox = document.getElementById('searchBox');
-            let searchText = searchBox.value;
-            if (!searchText) return;
+            const searchBox = document.getElementById('searchBox');
+            const searchTextValue = searchBox.value.trim();
+            if (searchTextValue === '') return;
 
-            let content = document.getElementById('content');
-            let innerHTML = content.innerHTML;
-            let regex = new RegExp(searchText, 'gi');
-            let newHTML = innerHTML.replace(regex, (match) => `<span class="highlight">${match}</span>`);
-            content.innerHTML = newHTML;
+            highlightText(document.body, searchTextValue);
         }
     </script>
 

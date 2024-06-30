@@ -86,11 +86,18 @@
       <div class="content-wrap col-12 col-md-12">
         <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1">
 
-		function search(string){
-window.find(string);
+
+
+		<input id="searchText"><button onclick="search()">Search</button>
+<script>
+function search() {
+   var searchText = $("#searchBar").val();
+   $(".searchText:contains('" + searchText + "')").css("background","#FF0");
 }
-<input placeholder="Search for a game" type="text" id="search">
-<input type="button" value="Go" onclick="search(document.getElementById('search').value)">
+</script>
+<div class=".searchText">Some kind of text would go here</div>
+
+		
 		
           <strong><br>NSFW</strong><br><strong>itsaleak</strong></h1>
         <h2 class="mbr-section-subtitle mbr-fonts-style mbr-white mb-4 display-2">Download PAID NSFW Itch games for absolutely free!</h2>
